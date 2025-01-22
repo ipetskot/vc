@@ -16,42 +16,14 @@ void StartMessage()
     printf("Please select the option to write the array values:\n1 - Auto\n2 - Manual\n\n");
 }
 
-int GetMode()
-{
-    int mode;
-    scanf("%d", &mode);
-    return mode;
-}
-
 void ShowArray(int array[], int array_size)
 {
     int i;
-    printf("Array:\n");
     for (i = 0; i < array_size; i++)
     {
         printf("%d ", array[i]);
     }
     printf("\n\n");
-}
-
-void SetValues(int array[], int array_size, int mode)
-{
-    int i;
-
-    if (mode == 1)
-    {
-        for (i = 0; i < array_size; i++)
-        {
-            array[i] = rand() % 101;
-        }
-    }
-    if (mode == 2)
-    {
-        for (i = 0; i < array_size; i++)
-        {
-            scanf("%d", &array[i]);
-        }
-    }
 }
 
 ResultData GetAns(int array[], int array_size)
@@ -97,24 +69,55 @@ ResultData GetAns(int array[], int array_size)
     return result;
 }
 
+void ShowAns(ResultData ans)
+{
+    if (ans.start_index == -1)
+    {
+        printf("There is no increasing sequence in the array.\n\n");
+        printf("=============================================================================\n");
+    }
+    else if (ans.start_index == 0)
+    {
+        printf("The sequence is located at the beginning of the array.\n");
+        printf("Max len - % d\nStart index - % d\n\n", ans.max_len, ans.start_index);
+        printf("=============================================================================\n");
+    }
+    else if(ans.start_index > 0)
+    {
+        printf("The sequence is located inside the array.\n");
+        printf("Max len - % d\nStart index - % d\n\n", ans.max_len, ans.start_index);
+        printf("=============================================================================\n");
+    }
+}
+
 int main()
 {
     srand(time(NULL));
 
     const int array_size = 10;
-    
-    StartMessage();
         
-    int mode = GetMode(); // Режим заполнения массива
-    int array[array_size];
-    // int array[] = { 10, 12, 5, 1, 3, 4, 5, 6, 1, 1 };
-
-    SetValues(array, array_size, mode);
-    ShowArray(array, array_size);
+    int array_one[] = { 25, 20, 14, 26, 65, 131, 148, 4, 1, 1 };
+    int array_two[] = { 100, 69, 57, 42, 33, 29, 24, 12, 10, 1 };
+    int array_three[] = { 125, 315, 500, 600, 512, 256, 128, 64, 32, 1 };
 
     ResultData ans;
-    ans = GetAns(array, array_size);
-    
-    printf("Result:\nMax len - %d\nStart index - %d\n\na", ans.max_len, ans.start_index);
+
+    ans = GetAns(array_one, array_size);
+
+    printf("Result for ARRAY: ");
+    ShowArray(array_one, array_size);
+    ShowAns(ans);
+
+    ans = GetAns(array_two, array_size);
+
+    printf("Result for ARRAY: ");
+    ShowArray(array_two, array_size);
+    ShowAns(ans);
+
+    ans = GetAns(array_three, array_size);
+
+    printf("Result for ARRAY: ");
+    ShowArray(array_three, array_size);
+    ShowAns(ans);
 
 }
