@@ -49,17 +49,18 @@ ResultData GetAns(int array[], int array_size)
         }
         else
         {
-            if (bef_max_len < max_len)
-            {
-                bef_start_index = start_index;
-                bef_max_len = max_len;
-            }
-
             start_index = -1;
             max_len = 0;
         }
+        
         tmp = array[i];
         tmp_index = i;
+
+        if (bef_max_len < max_len)
+        {
+            bef_start_index = start_index;
+            bef_max_len = max_len;
+        }
     }
 
     ResultData result;
@@ -98,7 +99,7 @@ int main()
         
     int array_one[] = { 25, 20, 14, 26, 65, 131, 148, 4, 1, 1 };
     int array_two[] = { 100, 69, 57, 42, 33, 29, 24, 12, 10, 1 };
-    int array_three[] = { 125, 315, 500, 600, 512, 256, 128, 64, 32, 1 };
+    int array_three[] = { 1, 31, 50, 60, 102, 125, 158, 364, 532, 601 };
 
     ResultData ans;
 
